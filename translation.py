@@ -34,7 +34,7 @@ except:
 
 try:
     # Open controller file
-    with open('/var/www/html/ocex/apps/'+site+'/controllers/'+controller+'Controller.php', 'r') as myfile:
+    with open(path+site+'/controllers/'+controller+'Controller.php', 'r') as myfile:
         data = myfile.read()
 
     # Search function in controller file
@@ -53,7 +53,7 @@ except:
 
 try:
     #    Open language file
-    file = '/var/www/html/ocex/apps/'+site+'/language/pl/'+controller.lower()+'/' + \
+    file = path+site+'/language/pl/'+controller.lower()+'/' + \
         action+'.php'
 
     with open(file, 'r') as myfile:
