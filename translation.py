@@ -1,4 +1,4 @@
-# Print array translation file structure from files which contain $t['example']  variables (controller and view file) and language file. Getting data from Phalcona files.
+# Create Phalcon translation file from content($t array variables) view, controller and current language file using python file.
 
 import re
 import sys
@@ -67,7 +67,7 @@ try:
     for text in result:
         i += 1
 
-#       Check that variables is key or value and add in wright place
+#       Check that variables is key or value and add in appropriate place
         if i % 2 == 0:
             s[key] = text
         else:
