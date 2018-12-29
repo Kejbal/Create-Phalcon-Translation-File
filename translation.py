@@ -34,7 +34,6 @@ except:
 
 try:
     # Open controller file
-
     with open(path+site+'/controllers/'+controller+'Controller.php', 'r') as myfile:
         data = myfile.read()
 
@@ -83,6 +82,5 @@ print '<?php \n\n$messages = ['
 
 for t in sorted(s.iterkeys()):
     print ' "' + t + '" => "' + s[t] + '",'
-
 
 print '];'
