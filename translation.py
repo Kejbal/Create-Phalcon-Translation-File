@@ -34,6 +34,7 @@ except:
 
 try:
     # Open controller file
+
     with open(path+site+'/controllers/'+controller+'Controller.php', 'r') as myfile:
         data = myfile.read()
 
@@ -53,7 +54,7 @@ except:
 
 try:
     #    Open language file
-    file = path+site+'/language/pl/'+controller.lower()+'/' + \
+    file = path+site+'/language/'+language+'/'+controller.lower()+'/' + \
         action+'.php'
 
     with open(file, 'r') as myfile:
@@ -84,4 +85,4 @@ for t in sorted(s.iterkeys()):
     print ' "' + t + '" => "' + s[t] + '",'
 
 
-print ']'
+print '];'
