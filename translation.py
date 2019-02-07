@@ -16,16 +16,32 @@ try:
 except:
     print 'You need write in console "site" "controller" "action" "language"'
 
+def findTranslation(data):
+    return re.findall('t\[\'(.*?)\'\]', data)
+
+def viewFile(file):
+     # Open view file
+    with open(file, 'r') as myfile:
+        data = myfile.read()
+    # Search $t array keys
+    result = findTranslation(data);
+
+    partials = re.findall('partial\(\'(.*?)\'\)\?>', data)
+    p_result_array = {};
+
+    for partial in partials:
+        file=path+site+'/views/partials/'+partial+'.phtml'
+        p_result=viewFile(file)
+        result=result+p_result
+
+
+    return result
+
 try:
 
-    # Open view file
-    with open(path+site+'/views/'+controller.lower()+'/'+action+'.phtml', 'r') as myfile:
-        data = myfile.read()
+    file=path+site+'/views/'+controller.lower()+'/'+action+'.phtml'
+    result=viewFile(file)
 
-    # Search $t array keys
-    result = re.findall('t\[\'(.*?)\'\]', data)
-
-    # Add keys to dictionary
     for i in result:
         if i not in s:
             s[i] = i
@@ -41,7 +57,7 @@ try:
     result = re.findall(action+'Action(.*?)public', data, re.DOTALL)
 
     # Search $t array keys
-    result = re.findall('t\[\'(.*?)\'\]', result[0])
+    result = findTranslation(result[0]);
 
     # Add keys to dictionary
     for i in result:
