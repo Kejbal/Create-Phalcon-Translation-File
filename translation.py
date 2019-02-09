@@ -56,11 +56,23 @@ try:
     # Search function in controller file
     result = re.findall(action+'Action(.*?)public', data, re.DOTALL)
 
+    t_file = re.findall('getTranslation\((.*?)\)\;', result[0])
+
+    if len(t_file) == 0:
+        lang_file = path + site + '/language/' + language + '/' + controller.lower() + '/' + action + '.php'
+    else:
+        t_file = t_file[0]
+        t_file = t_file.replace("'", '')
+        t_file=t_file.replace('"', '')
+        t_file = t_file.split(',')
+        lang_file =lang_file = path + site + '/language/' + language + '/' + t_file[0].strip()+ '/' + t_file[1].strip()  + '.php'
+
+
     # Search $t array keys
-    result = findTranslation(result[0]);
+    result_t = findTranslation(result[0]);
 
     # Add keys to dictionary
-    for i in result:
+    for i in result_t:
         if i not in s:
             s[i] = i
 except:
@@ -69,8 +81,7 @@ except:
 
 try:
     #    Open language file
-    file = path+site+'/language/'+language+'/'+controller.lower()+'/' + \
-        action+'.php'
+    file = lang_file
 
     with open(file, 'r') as myfile:
         data = myfile.read()
