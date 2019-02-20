@@ -55,6 +55,10 @@ try:
 
     # Search function in controller file
     result = re.findall(action+'Action(.*?)public', data, re.DOTALL)
+    if not result:
+        result = re.findall(action + 'Action(.*?)protected', data, re.DOTALL)
+    if not result:
+        result = re.findall(action + 'Action(.*?)private', data, re.DOTALL)
 
     t_file = re.findall('getTranslation\((.*?)\)\;', result[0])
 
